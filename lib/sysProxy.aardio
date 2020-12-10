@@ -27,10 +27,7 @@ switch = function(mode){
         
         if(socksProxyPort){
             if(..config.proxy.useHttpGlobal){
-            	..inet.conn.setProxy(,"HTTP=HTTP://127.0.0.1:" + httpProxPort
-            		+ ";HTTPS=HTTP://127.0.0.1:"+ httpProxPort
-            		+ ";FTP=HTTP://127.0.0.1:" + httpProxPort
-            		+ ";SOCKS=127.0.0.1:" + socksProxyPort ) 
+            	..inet.conn.setProxy(,"127.0.0.1:" + httpProxPort) 
             }
             else {
             	..inet.conn.setProxy(,"SOCKS=127.0.0.1:"+socksProxyPort); 

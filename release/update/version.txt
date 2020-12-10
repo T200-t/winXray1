@@ -1,8 +1,8 @@
 {
-    "description":"允许自定义全局代理模式是否使用HTTP代理，WIN7默认启用HTTP全局代理，WIN10默认启用SOCKS全局代理",
+    "description":"修正WIN7设置全局代理的问题，增加测速工具。Fixes #1",
     "format":".lzma",
     "main":"\\winXray.exe",
     "updater":"\\winXray.exe",
     "url":"https://raw.githubusercontent.com/winXray/winXray/master/release/update/",
-    "version":"1.4"
+    "version":"1.4.02"
 }

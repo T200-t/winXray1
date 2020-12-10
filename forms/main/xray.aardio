@@ -65,12 +65,13 @@ var activeOutbound = function(outboundIndex,outboundAddress,enableRetry){
 				restClient._http.setTimeouts(1000,2000,2000);
 				restClient.get("https://www.google.com/generate_204");
 				var lastStatusCode = restClient.lastStatusCode;
-				restClient.close();
+				
  				
 				if( lastStatusCode == 204 ){
 					frmXray.onStartXrayComplete(outboundIndex,currentTesting);
 					return;	
 				}
+				restClient.close();
 				
 				import wsock.tcp.socks5Client;
 				for(i=1;2;1){ 
@@ -132,7 +133,8 @@ frmXray.onStartXrayComplete = function(outboundIndex,currentTesting){
 	frmXray.listview.setItemText("活动服务器：正常",outboundIndex,8);
 	frmXray.listview.activeOutboundIndex = outboundIndex;
 
-	if(!currentTesting) frmXray.edit.print("已切换到服务器：",frmXray.listview.getItemText(outboundIndex,2));
+	var address  = frmXray.listview.getItemText(outboundIndex,2);
+	if(!currentTesting) frmXray.edit.print("已切换到服务器：",address);
 
 	if(frmXray.listview.getItemText(outboundIndex,7)=="不可用"){
 		frmXray.listview.setItemText("...",outboundIndex,7);
@@ -141,9 +143,17 @@ frmXray.onStartXrayComplete = function(outboundIndex,currentTesting){
 	frmXray.onTcpingReturn = function(){};
 	frmXray.btnTcping.disabledText = null;
 	frmXray.validOutbounds = {};
+	
+	..publish("activeOutbound",address);
 }
 
+subscribe("activeOutbound",function(address){
+    ..globalActiveOutbound = address;
+} )
+
 frmXray.onStartXrayFailed = function(outboundIndex,enableRetry){
+    ..publish("activeOutbound",false);
+    
 	frmXray.listview.ensureVisible(outboundIndex);
 	if(frmXray.listview.activeOutboundIndex==outboundIndex){
 		frmXray.listview.activeOutboundIndex=null;

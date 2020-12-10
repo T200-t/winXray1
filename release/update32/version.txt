@@ -1,0 +1,8 @@
+{
+    "description":"修正WIN7设置全局代理的问题，增加测速工具。Fixes #1",
+    "format":".lzma",
+    "main":"\\winXray.exe",
+    "updater":"\\winXray.exe",
+    "url":"https://raw.githubusercontent.com/winXray/winXray/master/release/update32/",
+    "version":"1.4.02"
+}

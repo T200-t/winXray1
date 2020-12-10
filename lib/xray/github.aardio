@@ -13,7 +13,7 @@ setProxy = function(enableProxy){
    } 
 
    var socksPort = ..xray.core.socksProxyPort;
-   if(!socksPort && enableProxy) error("SOCKS端口尚未初始化！")
+   if(!socksPort && enableProxy) return; 
 
     var git;
 	if(enableProxy){

@@ -159,7 +159,7 @@ import fonts.fontAwesome;
 /*DSG{{*/
 mainForm = win.form(text="winXray";right=1019;bottom=679;bgcolor=15793151;border="none")
 mainForm.add(
-caption={cls="bkplus";text="winXray 1.4.0";left=67;top=9;right=727;bottom=27;align="left";color=6052956;dl=1;dt=1;font=LOGFONT(h=-14);z=7};
+caption={cls="bkplus";text="winXray 1.4.2";left=67;top=9;right=727;bottom=27;align="left";color=6052956;dl=1;dt=1;font=LOGFONT(h=-14);z=7};
 custom={cls="custom";left=83;top=40;right=1022;bottom=679;bgcolor=16777215;db=1;dl=1;dr=1;dt=1;z=4};
 logo={cls="bkplus";text='\uF1D9';left=35;top=7;right=64;bottom=32;color=3054125;dl=1;dt=1;font=LOGFONT(h=-18;name='FontAwesome');z=6};
 navBar={cls="bkplus";left=0;top=37;right=83;bottom=681;bgcolor=3442175;db=1;dl=1;dt=1;z=1};
@@ -258,16 +258,23 @@ mainForm.wndproc = {
 			
 			mainForm.popmenu.add();
 			
-			mainForm.popmenu.add('打开系统代理设置',function(id){  
-				import process.control; 
-				if(_WIN10_LATER){ 
+			if(_WIN10_LATER){
+				mainForm.popmenu.add('打开系统代理设置',function(id){  
+					import process.control; 
 					process.control("ms-settings:network-proxy")
-				}
-				else {
-					process.control("inetcpl.cpl",,4)
-				}  
-			});
-			
+				});	
+				mainForm.popmenu.add('打开Internet代理选项',function(id){  
+					import process.control; 
+					process.control("inetcpl.cpl",,4);
+				});
+			}
+			else {
+				mainForm.popmenu.add('打开系统代理设置',function(id){  
+					import process.control; 
+					process.control("inetcpl.cpl",,4);
+				});	
+			}
+			 
 			mainForm.popmenu.add('打开网卡连接',function(id){  
 				import process;
 				process.explore("shell:::{7007ACC7-3202-11D1-AAD2-00805FC1270E}");	

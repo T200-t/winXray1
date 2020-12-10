@@ -51,6 +51,8 @@ restart = function(editor,outbound){
 		return false,err:"启动失败,写入配置文件遇到错误！"; 
 	}
 	
+	..publish("activeOutbound",false);
+	
 	import sysProxy;
 	..sysProxy.reset(false);	
 	prcsXray = ..process.popen(corePath,"run","-c=config.json" );

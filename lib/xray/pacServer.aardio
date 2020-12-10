@@ -21,12 +21,19 @@ $serverMain = ..wsock.tcp.simpleHttpServer.mainThread(
 
 				..pacData = ..string.load(pacPath);
 			}
-		
+
 			var reps = ..string.replace(pacData
 				,"var\s+proxy\s+=\s+%''","var proxy = 'SOCKS "
                     + request.environ.SERVER_NAME +":"+..proxPorts.socksProxy
                     +";HTTP "+ request.environ.SERVER_NAME +":"+..proxPorts.httpProxy 
                     +"'"); 
+                    
+            if(!_WIN10_LATER){ 
+				var ua = request.headers[["user-agent"]];
+				if( ua && ..string.find(ua,"MSIE.+Trident\/") ){
+					reps = ..string.replace(pacData,"var\s+proxy\s+=\s+%''","var proxy = 'PROXY "+ request.environ.SERVER_NAME +":"+..proxPorts.httpProxy +"'"); 
+				}
+            }
 
 			response.write(reps);  
 		}  
